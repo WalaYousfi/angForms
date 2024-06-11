@@ -1,1 +1,74 @@
+// Import Angular Material theming functions and components
+@use "@angular/material" as mat;
+@import url("https://use.typekit.net/jnq3uxd.css");
+
+// Define your custom typography (optional)
+$custom-typography: mat.define-typography-config(
+  $font-family: "sofia-pro",
+);
+
+// Include the common styles for Angular Material using the new `mat.core` mixin
+@include mat.core();
+
+// Define custom palettes
+$custom-yellow-palette: (
+  50: #fffde7,
+  100: #fff9c4,
+  200: #fff59d,
+  300: #fff176,
+  400: #ffee58,
+  500: #ffeb3b,
+  600: #fdd835,
+  700: #fbc02d,
+  800: #f9a825,
+  900: #f57f17,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: rgba(0, 0, 0, 0.87),
+    600: rgba(0, 0, 0, 0.87),
+    700: rgba(0, 0, 0, 0.87),
+    800: rgba(0, 0, 0, 0.87),
+    900: rgba(0, 0, 0, 0.87),
+  ),
+);
+
+$custom-yellow: mat.define-palette($custom-yellow-palette);
+
+$mat-green: mat.define-palette(mat.$green-palette, A200, A100, A400);
+$mat-red: mat.define-palette(mat.$red-palette);
+
+// Define your custom dark theme
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $custom-yellow,
+      accent: $mat-green,
+      warn: $mat-red,
+    ),
+    typography: $custom-typography,
+  )
+);
+
+// Include theme styles for core and each component used in your app using the new `mat.all-component-themes` mixin
+@include mat.all-component-themes($dark-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "sofia-pro", sans-serif;
+  background-color: mat.get-color-from-palette($custom-yellow, 900); // Optional: Set a dark background color
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
